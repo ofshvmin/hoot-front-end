@@ -46,10 +46,14 @@ function App() {
   }
 
   const handleUpdateBlog = async blogFormData => {
-    console.log('the submit was clicked')
-    console.log(blogFormData);
     const updatedBlog = await blogService.update(blogFormData)
     setBlogs(blogs.map((b) => blogFormData._id === b._id ? updatedBlog : b))
+    navigate('/blogs')
+  }
+  
+  const handleDeleteBlog = async blogId => {
+    const deletedBlog = await blogService.delete(blogId)
+    setBlogs(blogs.filter(b => b._id !== deletedBlog._id))
     navigate('/blogs')
   }
 
@@ -88,7 +92,7 @@ function App() {
           path='/blogs/:blogId'
           element={
             <ProtectedRoute user={user}>
-              <BlogDetails user={user} />
+              <BlogDetails user={user} handleDeleteBlog={handleDeleteBlog} />
             </ProtectedRoute>
             }
         />

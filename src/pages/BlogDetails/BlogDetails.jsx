@@ -43,7 +43,7 @@ if(!blog) return <Loading />
                 to={`/blogs/${blogId}/edit`} 
                 state={blog}
               >Edit</Link>
-              <button>Delete</button>
+              <button onClick={() => props.handleDeleteBlog(blogId)}>Delete</button>
             </>
             }
           </span>
