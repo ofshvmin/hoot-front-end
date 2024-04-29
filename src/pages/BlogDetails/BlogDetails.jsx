@@ -1,6 +1,6 @@
 // npm modules
 import { useEffect, useState } from "react"
-import { json, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 // components
 import Loading from "../Loading/Loading"
@@ -13,7 +13,7 @@ import styles from './BlogDetails.module.css'
 // services
 import * as blogService from '../../services/blogService'
 
-const BlogDetails = (props) => {
+const BlogDetails = () => {
   const [blog, setBlog] = useState(null)
   const { blogId } = useParams()
 

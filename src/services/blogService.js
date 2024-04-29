@@ -18,6 +18,22 @@ async function index() {
     try {
       const res = await fetch(`${BASE_URL}/${blogId}`, {
         headers: { 'Authorization': `Bearer ${tokenService.getToken()}` },
+      })
+      return res.json()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  
+  async function create(blogFormData) {
+    try {
+      const res = await fetch(BASE_URL, {
+        method: 'POST',
+        headers: { 
+          'Authorization': `Bearer ${tokenService.getToken()}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(blogFormData)
     })
     return res.json()
   } catch (err) {
@@ -28,4 +44,5 @@ async function index() {
 export { 
   index, 
   show,
+  create,
 }
