@@ -7,6 +7,17 @@ async function index() {
     const res = await fetch(BASE_URL, {
       headers: {
         'Authorization': `Bearer ${tokenService.getToken()}` },
+      })
+      return res.json()
+    } catch (err) {
+      console.log(err)
+    }
+  }
+  
+  async function show(blogId) {
+    try {
+      const res = await fetch(`${BASE_URL}/${blogId}`, {
+        headers: { 'Authorization': `Bearer ${tokenService.getToken()}` },
     })
     return res.json()
   } catch (err) {
@@ -14,4 +25,7 @@ async function index() {
   }
 }
 
-export { index }
+export { 
+  index, 
+  show,
+}
