@@ -1,6 +1,6 @@
 // npm modules
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 
 // components
 import Loading from "../Loading/Loading"
@@ -13,7 +13,7 @@ import styles from './BlogDetails.module.css'
 // services
 import * as blogService from '../../services/blogService'
 
-const BlogDetails = () => {
+const BlogDetails = (props) => {
   const [blog, setBlog] = useState(null)
   const { blogId } = useParams()
 
@@ -37,6 +37,15 @@ if(!blog) return <Loading />
           <h1>{blog.title}</h1>
           <span>
             <AuthorInfo content={blog}/>
+            {blog.author._id === props.user.profile && 
+            <>
+              <Link 
+                to={`/blogs/${blogId}/edit`} 
+                state={blog}
+              >Edit</Link>
+              <button>Delete</button>
+            </>
+            }
           </span>
         </header>
         <p>{blog.text}</p>

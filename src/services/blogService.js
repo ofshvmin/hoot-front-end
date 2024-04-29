@@ -41,8 +41,27 @@ async function index() {
   }
 }
 
+async function update(blogFormData) {
+  try {
+    console.log('the update service function was triggered')
+    const res = await fetch(`${BASE_URL}/${blogFormData._id}`, {
+      method: 'PUT',
+      headers: { 
+        'Authorization': `Bearer ${tokenService.getToken()}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(blogFormData)
+  })
+    return res.json()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+
 export { 
   index, 
   show,
   create,
+  update,
 }
